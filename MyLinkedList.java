@@ -34,7 +34,26 @@ public class MyLinkedList{
      }
      c = c.next();
    }
+   result = result + "]";
    return result;
  }
-
+ private Node getNthNode(int index){
+   Node c = start;
+   for (int i = 0; i < this.size; i++){
+     if (i == index){
+       return c;
+     }
+     c = c.next();
+   }
+   return c; //should never happen
+ }
+ public Integer get(int index){
+   if ((size < index + 1) || (index < 0)){
+     throw new IndexOutOfBoundsException("index must be less than size and nonnegative");
+   }
+   return getNthNode(index).getData();
+ }
+ public Integer set(int index, Integer value){
+   if 
+ }
 }
