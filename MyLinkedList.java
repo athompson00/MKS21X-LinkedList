@@ -72,5 +72,71 @@ public class MyLinkedList{
    }
    return false;
  }
-
-}
+ public int indexOf(Integer value){
+   if (!(this.contains(value))){
+     return -1;
+   }
+   Node c = start;
+   for (int i = 0; i < size; i++){
+     if (c.getData() == value){
+       return i;
+     }
+     c = c.next();
+   }
+   return -1;
+ }
+ public void add(int index, Integer value){
+   if ((index >= size) || (index < 0)){
+     throw new IndexOutOfBoundsException("index must be less than size and nonnegative");
+   }
+   Node n = new Node(value);
+   if (index == size - 1){
+     add(value);
+   } else if (index == 0){
+     Node a = start;
+     start = n;
+     n.setNext(a);
+     a.setPrev(n);
+     size++;
+   } else if (index > 0){
+     Node a = getNthNode(index);
+     a.prev().setNext(n);
+     n.setPrev(a.prev());
+     a.setPrev(n);
+     n.setNext(a);
+     size++;
+   }
+ }
+   public Integer remove(int index){
+     if ((index >= size) || (index < 0)){
+       throw new IndexOutOfBoundsException("index must be less than size and nonnegative.");
+     }
+     if (index == 0){
+       Node removed = getNthNode(index);
+       start = null;
+       end = null;
+       size--;
+       return removed.getData();
+     } else if (index == size - 1){
+       Node removed = getNthNode(index);
+       end = removed.prev();
+       removed.setPrev(null);
+       size--;
+       return removed.getData();
+     } else if (index == 1){
+       Node removed = getNthNode(index);
+       start = removed.next();
+       removed.setNext(null);
+       size--;
+       return removed.getData();
+     } else {
+      Node removed = getNthNode(index);
+      Node previous = removed.prev();
+      Node nextNode = removed.next();
+      previous.setNext(nextNode);
+      nextNode.setPrev(previous);
+      size--;
+      return removed.getData();
+    }
+   }
+ }
