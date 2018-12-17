@@ -1,34 +1,4 @@
-class Node{
- private int data;
- private Node next,prev;
- public Node(Integer n, Node a, Node b){
-   data = n;
-   next = a;
-   prev = b;
- }
- public int getNode(){
-   return data;
- }
- public Node getNext(){
-   return next;
- }
- public Node getPrev(){
-   return prev;
- }
- public Node setNext(Integer n){
-   Integer o = next.data;
-   next = Node(n);
-   return o;
- }
- public Node setPrev(Integer n){
-   Integer o = prev.data;
-   prev = Node(n);
-   return o;
- }
-}
-
-
-class MyLinkedList{
+public class MyLinkedList{
  private int size;
  private Node start,end;
 
@@ -37,14 +7,34 @@ class MyLinkedList{
    start = null;
    end = null;
  }
- public int size();
+ public int size(){
+   return size;
+ }
  public boolean add(Integer value){
-  Node a = Node(value, null, end);
-  this.end.setNext(a);
-  this.end = a;
+  Node a = new Node(value);
+  if (size == 0){
+    start = a;
+    end = a;
+  } else {
+    a.setPrev(end);
+    this.end.setNext(a);
+    this.end = a;
+  }
   size += 1;
   return true;
  }
- 
- public String toString();
+
+ public String toString(){
+   Node c = start;
+   String result = "[";
+   while (!(c == null)){
+     result = result + c.getData();
+     if (!(c.next() == null)){
+       result = result + ", ";
+     }
+     c = c.next();
+   }
+   return result;
+ }
+
 }
