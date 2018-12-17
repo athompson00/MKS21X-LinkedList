@@ -139,4 +139,40 @@ public class MyLinkedList{
       return removed.getData();
     }
    }
- }
+   public boolean remove(Integer value){
+     Node c = start;
+     if (!(this.contains(value))){
+       return false;
+     }
+     for (int i = 0; i < size; i++){
+       if (size == 1 && c.getData() == value){
+         start = null;
+         end = null;
+         size--;
+         return true;
+       } else if (c.getData() == value){
+           Node n = c;
+           if (n.prev() == null){
+             start = n.next();
+             n.next().setPrev(null);
+             size--;
+             return true;
+           } else if (n.next() == null){
+             end = n.prev();
+             n.prev().setNext(null);
+             size--;
+             return true;
+           } else {
+             n.prev().setNext(n.next());
+             n.next().setPrev(n.prev());
+             n.setPrev(null);
+             n.setNext(null);
+             size--;
+             return true;
+           }
+         }
+         c = c.next();
+       }
+     return false;
+   }
+}
