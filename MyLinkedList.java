@@ -54,6 +54,12 @@ public class MyLinkedList{
    return getNthNode(index).getData();
  }
  public Integer set(int index, Integer value){
-   if 
+   if ((index >= size) || (index < 0)){
+     throw new IndexOutOfBoundsException("index must be less than size and nonnegative");
+   }
+   Node c = getNthNode(index);
+   int n = c.getData();
+   c.setData(value);
+   return n;
  }
 }
