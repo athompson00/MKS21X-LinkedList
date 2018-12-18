@@ -143,41 +143,14 @@ public class MyLinkedList{
      int n = this.indexOf(value);
      this.remove(n);
      return true;
-/*
-     Node c = start;
-     if (!(this.contains(value))){
-       return false;
-     }
-     for (int i = 0; i < size; i++){
-       if (size == 1 && c.getData() == value){
-         start = null;
-         end = null;
-         size--;
-         return true;
-       } else if (c.getData() == value){
-           Node n = c;
-           if (n.prev() == null){
-             start = n.next();
-             n.next().setPrev(null);
-             size--;
-             return true;
-           } else if (n.next() == null){
-             end = n.prev();
-             n.prev().setNext(null);
-             size--;
-             return true;
-           } else {
-             n.prev().setNext(n.next());
-             n.next().setPrev(n.prev());
-             n.setPrev(null);
-             n.setNext(null);
-             size--;
-             return true;
-           }
-         }
-         c = c.next();
-       }
-     return false;
-     */
+   }
+   public void extend(MyLinkedList other){
+     this.end.setNext(other.start);
+     other.start.setPrev(this.end);
+     this.size += other.size;
+     this.end = other.end;
+     other.start = null;
+     other.end = null;
+     other.size = 0;
    }
 }
