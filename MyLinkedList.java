@@ -64,7 +64,7 @@ public class MyLinkedList{
  }
  public boolean contains(Integer value){
    Node c = start;
-   for (int i = 0; i < size; i++){
+   while (c != null){
      if (c.getData() == value){
        return true;
      }
@@ -73,11 +73,8 @@ public class MyLinkedList{
    return false;
  }
  public int indexOf(Integer value){
-   if (!(this.contains(value))){
-     return -1;
-   }
    Node c = start;
-   for (int i = 0; i < size; i++){
+   for (int i = 0; i < this.size - 1; i++){
      if (c.getData() == value){
        return i;
      }
@@ -90,13 +87,13 @@ public class MyLinkedList{
      throw new IndexOutOfBoundsException("index must be less than size and nonnegative");
    }
    Node n = new Node(value);
-   if (index == size - 1){
+   if (index == size){
      add(value);
    } else if (index == 0){
      Node a = start;
-     start = n;
      n.setNext(a);
      a.setPrev(n);
+     start = n;
      size++;
    } else if (index > 0){
      Node a = getNthNode(index);
@@ -113,8 +110,8 @@ public class MyLinkedList{
      }
      if (index == 0){
        Node removed = getNthNode(index);
-       start = null;
-       end = null;
+       start = removed.next();
+       removed.next().setPrev(null);
        size--;
        return removed.getData();
      } else if (index == size - 1){
@@ -140,6 +137,13 @@ public class MyLinkedList{
     }
    }
    public boolean remove(Integer value){
+     if (!(this.contains(value))){
+       return false;
+     }
+     int n = this.indexOf(value);
+     this.remove(n);
+     return true;
+/*
      Node c = start;
      if (!(this.contains(value))){
        return false;
@@ -174,5 +178,6 @@ public class MyLinkedList{
          c = c.next();
        }
      return false;
+     */
    }
 }
